@@ -5,6 +5,7 @@ import LoginForm from './Components/LoginForm';
 import { authenticate } from './Modules/Auth';
 import DisplayPerformanceData from './Components/DisplayPerformanceData';
 import PerformanceData from './Modules/PerformanceData'
+import { Doughnut } from 'react-chartjs-2';
 
 class App extends Component {
   constructor(props) {
@@ -107,6 +108,8 @@ class App extends Component {
         />
         {performanceDataIndex}
         {renderLogin}
+
+        <Doughnut data= />
 
       </div>
     );
