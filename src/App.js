@@ -4,7 +4,11 @@ import InputFields from "./Components/InputFields";
 import LoginForm from './Components/LoginForm';
 import { authenticate } from './Modules/Auth';
 import DisplayPerformanceData from './Components/DisplayPerformanceData';
-import PerformanceData from './Modules/PerformanceData'
+import { 
+  Container, 
+  Grid,
+  Form,
+} from 'semantic-ui-react';
 
 class App extends Component {
   constructor(props) {
@@ -20,7 +24,7 @@ class App extends Component {
       message: '',
       entrySaved: false,
       renderIndex: false
-    }
+      }
   }
 
   entryHandler() {
@@ -91,24 +95,33 @@ class App extends Component {
         )
       }
     }
+    
     return (
-      <div>
-        <InputFields 
-          inputChangeHandler={this.onChange.bind(this)}
-        />
+      <Container>
+        <Grid centered columns={1}>
+          <Grid.Column>
+            <Form>
+              <div>
+                <InputFields 
+                  inputChangeHandler={this.onChange.bind(this)}
+                />
 
-        <DisplayCooperResult
-          distance={this.state.distance}
-          gender={this.state.gender}
-          age={this.state.age}
-          authenticated={this.state.authenticated}
-          entrySaved={this.state.entrySaved}
-          entryHandler={this.entryHandler.bind(this)}
-        />
-        {performanceDataIndex}
-        {renderLogin}
+                <DisplayCooperResult
+                  distance={this.state.distance}
+                  gender={this.state.gender}
+                  age={this.state.age}
+                  authenticated={this.state.authenticated}
+                  entrySaved={this.state.entrySaved}
+                  entryHandler={this.entryHandler.bind(this)}
+                />
+                {performanceDataIndex}
+                {renderLogin}
 
-      </div>
+              </div>
+            </Form>
+          </Grid.Column>
+        </Grid>
+      </Container>
     );
   }
 }
