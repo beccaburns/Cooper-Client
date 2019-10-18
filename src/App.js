@@ -8,6 +8,9 @@ import {
   Container, 
   Grid,
   Form,
+  Header,
+  Button,
+  Image
 } from 'semantic-ui-react';
 
 class App extends Component {
@@ -68,12 +71,12 @@ class App extends Component {
               updateIndex={this.state.updateIndex}
               indexUpdated={this.indexUpdated.bind(this)}
             />
-            <button onClick={() => this.setState({ renderIndex: false })}>Hide past entries</button>
+            <Button onClick={() => this.setState({ renderIndex: false })}>Hide past entries</Button>
           </>
         )
       } else {
         performanceDataIndex = (
-          <button id="show-index" onClick={() => this.setState({ renderIndex: true })}>Show past entries</button>
+          <Button id="show-index" onClick={() => this.setState({ renderIndex: true })}>Show past entries</Button>
         )
       }
     } else {
@@ -89,7 +92,7 @@ class App extends Component {
       } else {
         renderLogin = (
           <>
-            <button id="login" onClick={() => this.setState({ renderLoginForm: true })}>Login</button>
+            <Button id="login" onClick={() => this.setState({ renderLoginForm: true })}>Login</Button>
             <p>{this.state.message}</p>
           </>
         )
@@ -98,26 +101,47 @@ class App extends Component {
     
     return (
       <Container>
+        <Grid celled>
+          <Grid.Row>
+            <Grid.Column width={3}>
+              <Image src='/images/wireframe/image.png' />
+            </Grid.Column>
+
+            <Grid.Column width={10}>
+              <Form>
+                <Header as="h2" id="h2" textAlign="center">
+                  Cooper Challenge
+                </Header>
+                  <div>
+                    <InputFields 
+                      inputChangeHandler={this.onChange.bind(this)}
+                    />
+                    <DisplayCooperResult
+                      distance={this.state.distance}
+                      gender={this.state.gender}
+                      age={this.state.age}
+                      authenticated={this.state.authenticated}
+                      entrySaved={this.state.entrySaved}
+                      entryHandler={this.entryHandler.bind(this)}
+                    />
+                    {performanceDataIndex}
+                    {renderLogin}
+                  </div>
+              </Form>
+            </Grid.Column>
+
+            <Grid.Column width={3}>
+              <Image src='/images/wireframe/image.png' />
+            </Grid.Column>
+          </Grid.Row>
+        </Grid>
         <Grid centered columns={1}>
           <Grid.Column>
             <Form>
-              <div>
-                <InputFields 
-                  inputChangeHandler={this.onChange.bind(this)}
-                />
-
-                <DisplayCooperResult
-                  distance={this.state.distance}
-                  gender={this.state.gender}
-                  age={this.state.age}
-                  authenticated={this.state.authenticated}
-                  entrySaved={this.state.entrySaved}
-                  entryHandler={this.entryHandler.bind(this)}
-                />
-                {performanceDataIndex}
-                {renderLogin}
-
-              </div>
+            <p></p>
+            <Header as="h2" id="h2" textAlign="center">
+            BMI ?
+            </Header>
             </Form>
           </Grid.Column>
         </Grid>
