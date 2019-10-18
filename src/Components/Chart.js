@@ -1,13 +1,28 @@
 import React, {Component} from 'react';
-import {Line} from 'react-chartjs-2';
+import {Bar, Line} from 'react-chartjs-2';
 
-class chart extends Component{
+class Chart extends Component{
+  constructor(props) {
+    super(props);
+    this.state = {
+      chartData:{
+        distance: [],
+        age: [],
+        }
+
+      }
+    }
+  }
   render() {
     return (
       <div className="Chart">
-        CHART COMPONENT
+      <Bar
+        data={this.state.chartData}
+        options={{
+        }}
+      />
       </div>
-
     )
   }
-}
+
+export default Chart;

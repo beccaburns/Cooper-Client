@@ -4,7 +4,6 @@ import InputFields from "./Components/InputFields";
 import LoginForm from './Components/LoginForm';
 import { authenticate } from './Modules/Auth';
 import DisplayPerformanceData from './Components/DisplayPerformanceData';
-import PerformanceData from './Modules/PerformanceData'
 import { Chart } from './Components/Chart';
 
 class App extends Component {
@@ -109,7 +108,7 @@ class App extends Component {
         {performanceDataIndex}
         {renderLogin}
 
-        <Doughnut data= />
+        <Chart />
 
       </div>
     );
