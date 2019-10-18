@@ -5,7 +5,7 @@ import LoginForm from './Components/LoginForm';
 import { authenticate } from './Modules/Auth';
 import DisplayPerformanceData from './Components/DisplayPerformanceData';
 import PerformanceData from './Modules/PerformanceData'
-import { Doughnut } from 'react-chartjs-2';
+import { Chart } from './Components/Chart';
 
 class App extends Component {
   constructor(props) {
