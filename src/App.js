@@ -104,7 +104,7 @@ class App extends Component {
         <Grid celled>
           <Grid.Row>
             <Grid.Column width={3}>
-              <Image src='/images/wireframe/image.png' />
+              <Image src='./src/runner.png' />
             </Grid.Column>
 
             <Grid.Column width={10}>
