@@ -12,17 +12,18 @@ class Chart extends Component{
 
       }
     }
-  }
+  
   render() {
     return (
-      <div className="Chart">
+      <>
       <Bar
         data={this.state.chartData}
         options={{
         }}
       />
-      </div>
+      </>
     )
-  }
+  };
+}
 
 export default Chart;
