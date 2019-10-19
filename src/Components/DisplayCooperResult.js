@@ -52,5 +52,4 @@ class DisplayCooperResult extends Component {
   }
 }
 
-
-export default DisplayCooperResult
+export default DisplayCooperResult;

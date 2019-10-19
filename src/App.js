@@ -23,6 +23,19 @@ class App extends Component {
     }
   }
 
+  componentWillMount(){
+    this.getChartData();
+  }
+
+  getChartData() {
+    this.setState({
+      chartData:{
+        labels: ['age', 'distance'],
+
+    }})
+  }
+
+
   entryHandler() {
     this.setState({ entrySaved: true, updateIndex: true });
   }
@@ -108,7 +121,7 @@ class App extends Component {
         {performanceDataIndex}
         {renderLogin}
 
-        <Chart />
+        <Chart chartData={this.state.chartData} />
 
       </div>
     );

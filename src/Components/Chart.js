@@ -5,13 +5,15 @@ class Chart extends Component{
   constructor(props) {
     super(props);
     this.state = {
-      chartData:{
-        distance: [],
-        age: [],
-        }
-
+      chartData:props.chartData
       }
     }
+
+  static defaultProps = {
+    displayTitle:true,
+    displayLegend:true,
+    legendPosition:'right'
+  }
   
   render() {
     return (
@@ -19,7 +21,17 @@ class Chart extends Component{
       <Bar
         data={this.state.chartData}
         options={{
+          title:{
+            display:this.props.displayTitle,
+            text: 'Cooper Challenge Results',
+            fontSize:25
+          }, 
+          legend:{
+            display:this.props.displayLegend,
+            position:'right'
+          },
           maintainAspectRatio: false
+
         }}
       />
       </>
