@@ -4,6 +4,7 @@ import InputFields from "./Components/InputFields";
 import LoginForm from './Components/LoginForm';
 import { authenticate } from './Modules/Auth';
 import DisplayPerformanceData from './Components/DisplayPerformanceData';
+import Chart from './Components/Chart';
 import PerformanceData from './Modules/PerformanceData'
 
 class App extends Component {
@@ -105,9 +106,13 @@ class App extends Component {
           entrySaved={this.state.entrySaved}
           entryHandler={this.entryHandler.bind(this)}
         />
+        <div>
         {performanceDataIndex}
         {renderLogin}
-
+        </div>
+        <div>
+          <Chart />
+        </div>
       </div>
     );
   }
