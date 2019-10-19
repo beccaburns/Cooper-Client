@@ -5,6 +5,7 @@ import LoginForm from './Components/LoginForm';
 import { authenticate } from './Modules/Auth';
 import DisplayPerformanceData from './Components/DisplayPerformanceData';
 import Chart from './Components/Chart';
+import { getData } from './Modules/PerformanceData';
 
 class App extends Component {
   constructor(props) {
@@ -19,20 +20,17 @@ class App extends Component {
       password: '',
       message: '',
       entrySaved: false,
-      renderIndex: false
+      renderIndex: false,
+      renderGraph: false
     }
   }
 
-  componentWillMount(){
-    this.getChartData();
-  }
+  // componentWillMount(){
+  //   this.getChartData();
+  // }
 
-  getChartData() {
-    this.setState({
-      chartData:{
-        labels: ['age', 'distance'],
-
-    }})
+  getGraphData() {
+    this.setState({ renderGraph: false });
   }
 
 
@@ -64,6 +62,7 @@ class App extends Component {
     let renderLogin;
     let user;
     let performanceDataIndex;
+    let renderGraph;
 
     if (this.state.authenticated === true) {
       user = JSON.parse(sessionStorage.getItem('credentials')).uid;
@@ -95,7 +94,7 @@ class App extends Component {
             />
           </div>
         )
-      } else {
+     } else {
         renderLogin = (
           <>
             <button id="login" onClick={() => this.setState({ renderLoginForm: true })}>Login</button>
@@ -103,6 +102,19 @@ class App extends Component {
           </>
         )
       }
+
+    }  {
+      if (this.state.renderGraph === true){
+        renderGraph =  (          
+        <>
+          <renderGraph
+            updateGraph={this.state.updateGraph}
+            graphUpdated={this.graphUpdated.bind(this)}
+            />
+        </>
+        )
+    }
+
     }
     return (
       <div>
