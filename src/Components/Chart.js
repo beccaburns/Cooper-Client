@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {Bar, Line} from 'react-chartjs-2';
+import { Line } from 'react-chartjs-2';
 import { getData } from '../Modules/PerformanceData';
 
 class Chart extends Component{
