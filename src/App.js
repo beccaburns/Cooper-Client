@@ -5,7 +5,6 @@ import LoginForm from './Components/LoginForm';
 import { authenticate } from './Modules/Auth';
 import DisplayPerformanceData from './Components/DisplayPerformanceData';
 import Chart from './Components/Chart';
-import { getData } from './Modules/PerformanceData';
 
 class App extends Component {
   constructor(props) {
@@ -21,21 +20,16 @@ class App extends Component {
       message: '',
       entrySaved: false,
       renderIndex: false,
-      renderGraph: false
-    }
+      renderChart: false
+    };
   }
-
-  // componentWillMount(){
-  //   this.getChartData();
-  // }
-
-  getGraphData() {
-    this.setState({ renderGraph: false });
-  }
-
 
   entryHandler() {
-    this.setState({ entrySaved: true, updateIndex: true });
+    this.setState({ entrySaved: true, updateIndex: true, updateChart: true });
+  }
+
+  getChartData() {
+    this.setState({ renderChart: true });
   }
 
   indexUpdated() {
@@ -48,13 +42,18 @@ class App extends Component {
       entrySaved: false
     });
   }
+
+  hideLoginForm() {
+    this.setState({ renderLoginForm: false });
+  }
+
   async onLogin(e) {
     e.preventDefault();
     let resp = await authenticate(this.state.email, this.state.password)
     if (resp.authenticated === true) {
       this.setState({ authenticated: true });
     } else {
-      this.setState({ message: resp.message, renderLoginForm: false })
+      this.setState({ message: resp.message, renderLoginForm: false });
     }
   }
 
@@ -62,7 +61,7 @@ class App extends Component {
     let renderLogin;
     let user;
     let performanceDataIndex;
-    let renderGraph;
+    let renderChart;
 
     if (this.state.authenticated === true) {
       user = JSON.parse(sessionStorage.getItem('credentials')).uid;
@@ -78,10 +77,20 @@ class App extends Component {
             />
             <button onClick={() => this.setState({ renderIndex: false })}>Hide past entries</button>
           </>
-        )
+        );
       } else {
         performanceDataIndex = (
           <button id="show-index" onClick={() => this.setState({ renderIndex: true })}>Show past entries</button>
+        )
+      }
+      if (this.state.renderChart === true) {
+        renderChart = (          
+        <>
+          <Chart
+            updateChart={this.state.updateChart}
+            chartUpdated={this.chartUpdated.bind(this)}
+          />
+        </>
         )
       }
     } else {
@@ -93,7 +102,7 @@ class App extends Component {
               inputChangeHandler={this.onChange.bind(this)}
             />
           </div>
-        )
+        );
      } else {
         renderLogin = (
           <>
@@ -102,19 +111,6 @@ class App extends Component {
           </>
         )
       }
-
-    }  {
-      if (this.state.renderGraph === true){
-        renderGraph =  (          
-        <>
-          <renderGraph
-            updateGraph={this.state.updateGraph}
-            graphUpdated={this.graphUpdated.bind(this)}
-            />
-        </>
-        )
-    }
-
     }
     return (
       <div>
@@ -132,11 +128,10 @@ class App extends Component {
         />
         {performanceDataIndex}
         {renderLogin}
-
-        <Chart chartData={this.state.chartData} />
+        {renderChart}
 
       </div>
-    );
+    )
   }
 }
 
