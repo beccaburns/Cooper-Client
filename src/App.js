@@ -4,8 +4,7 @@ import InputFields from "./Components/InputFields";
 import LoginForm from './Components/LoginForm';
 import { authenticate } from './Modules/Auth';
 import DisplayPerformanceData from './Components/DisplayPerformanceData';
-import Chart from './Components/Chart';
-import PerformanceData from './Modules/PerformanceData'
+import CooperGraph from './Components/Chart';
 
 class App extends Component {
   constructor(props) {
@@ -20,16 +19,22 @@ class App extends Component {
       password: '',
       message: '',
       entrySaved: false,
-      renderIndex: false
+      renderIndex: false,
+      renderCooperData: false,
+      updateCooperData: false
     }
   }
 
   entryHandler() {
-    this.setState({ entrySaved: true, updateIndex: true });
+    this.setState({ entrySaved: true, updateIndex: true, updateCooperData: true });
   }
 
   indexUpdated() {
     this.setState({ updateIndex: false });
+  }
+
+  resultGraphUpdated() {
+    this.setState({ updateCooperData: false })
   }
 
   onChange(event) {
@@ -52,6 +57,7 @@ class App extends Component {
     let renderLogin;
     let user;
     let performanceDataIndex;
+    let getGraph;
 
     if (this.state.authenticated === true) {
       user = JSON.parse(sessionStorage.getItem('credentials')).uid;
@@ -71,6 +77,21 @@ class App extends Component {
       } else {
         performanceDataIndex = (
           <button id="show-index" onClick={() => this.setState({ renderIndex: true })}>Show past entries</button>
+        )
+      }
+      if (this.state.renderCooperData === true) {
+        getGraph = (
+          <>
+            <CooperGraph
+              updateCooperData={this.state.updateCooperData}
+              resultGraphUpdated={this.resultGraphUpdated.bind(this)}
+            />
+            <button id="Cgraph" onClick={() => this.setState({ renderCooperData: false })}>Hide Chart</button>
+          </>
+        )
+      } else {
+        getGraph = (
+          <button id="Cgraph" onClick={() => this.setState({ renderCooperData: true })}>Show Chart</button>
         )
       }
     } else {
@@ -106,12 +127,10 @@ class App extends Component {
           entrySaved={this.state.entrySaved}
           entryHandler={this.entryHandler.bind(this)}
         />
-        <div>
         {performanceDataIndex}
         {renderLogin}
-        </div>
         <div>
-          <Chart />
+          {getGraph}
         </div>
       </div>
     );
