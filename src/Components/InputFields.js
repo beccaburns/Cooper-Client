@@ -18,7 +18,7 @@ const InputFields = (props) => {
       onChange={props.inputChangeHandler}
     />
     <Form.Input 
-      fluid id id="age" 
+      fluid id="age" 
       placeholder="age"
       onChange={props.inputChangeHandler}
     />
