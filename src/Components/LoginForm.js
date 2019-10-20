@@ -3,12 +3,19 @@ import {
   Container, 
   Button, 
   Grid,
+  Form,
+  Header,
 } from 'semantic-ui-react';
 
 const LoginForm = (props) => {
   return (
     <Container>
       <Grid>
+      <Form type="large">
+    <Header as="h2"
+    >
+      Login
+    </Header>
         <div id="login-form" className="login-form">
           <div>
             <label >Email</label>
@@ -21,6 +28,7 @@ const LoginForm = (props) => {
           </div>
           <Button onClick={(e) => props.loginHandler(e)} id="submit">Submit</Button>
         </div>
+        </Form>
       </Grid>
     </Container>
   )
