@@ -10,7 +10,7 @@ import {
   Form,
   Header,
   Button,
-  Image
+  Segment,
 } from 'semantic-ui-react';
 
 class App extends Component {
@@ -101,48 +101,34 @@ class App extends Component {
     
     return (
       <Container>
-        <Grid celled>
-          <Grid.Row>
-            <Grid.Column width={3}>
-              <Image src='./src/runner.png' />
-            </Grid.Column>
-
-            <Grid.Column width={10}>
+        <Grid centered columns={1}>
+          <Grid.Column>
+            <Segment>
               <Form>
                 <Header as="h2" id="h2" textAlign="center">
                   Cooper Challenge
                 </Header>
-                  <div>
-                    <InputFields 
-                      inputChangeHandler={this.onChange.bind(this)}
-                    />
-                    <DisplayCooperResult
-                      distance={this.state.distance}
-                      gender={this.state.gender}
-                      age={this.state.age}
-                      authenticated={this.state.authenticated}
-                      entrySaved={this.state.entrySaved}
-                      entryHandler={this.entryHandler.bind(this)}
-                    />
-                    {performanceDataIndex}
-                    {renderLogin}
-                  </div>
-              </Form>
-            </Grid.Column>
+          
+                <div>
+                  <InputFields 
+                    inputChangeHandler={this.onChange.bind(this)}
+                  />
 
-            <Grid.Column width={3}>
-              <Image src='/images/wireframe/image.png' />
-            </Grid.Column>
-          </Grid.Row>
-        </Grid>
-        <Grid centered columns={1}>
-          <Grid.Column>
-            <Form>
-            <p></p>
-            <Header as="h2" id="h2" textAlign="center">
-            BMI ?
-            </Header>
-            </Form>
+                  <DisplayCooperResult
+                    distance={this.state.distance}
+                    gender={this.state.gender}
+                    age={this.state.age}
+                    authenticated={this.state.authenticated}
+                    entrySaved={this.state.entrySaved}
+                    entryHandler={this.entryHandler.bind(this)}
+                  />
+
+                  {performanceDataIndex}
+                  {renderLogin}
+
+                </div>
+              </Form>
+            </Segment>
           </Grid.Column>
         </Grid>
       </Container>
