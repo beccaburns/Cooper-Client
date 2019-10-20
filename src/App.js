@@ -4,7 +4,14 @@ import InputFields from "./Components/InputFields";
 import LoginForm from './Components/LoginForm';
 import { authenticate } from './Modules/Auth';
 import DisplayPerformanceData from './Components/DisplayPerformanceData';
-import PerformanceData from './Modules/PerformanceData'
+import { 
+  Container, 
+  Grid,
+  Form,
+  Header,
+  Button,
+  Segment,
+} from 'semantic-ui-react';
 
 class App extends Component {
   constructor(props) {
@@ -20,7 +27,7 @@ class App extends Component {
       message: '',
       entrySaved: false,
       renderIndex: false
-    }
+      }
   }
 
   entryHandler() {
@@ -30,6 +37,10 @@ class App extends Component {
   indexUpdated() {
     this.setState({ updateIndex: false });
   }
+
+  handleGenderChange(value) {
+		this.setState({ gender: value})
+	}
 
   onChange(event) {
     this.setState({
@@ -64,12 +75,12 @@ class App extends Component {
               updateIndex={this.state.updateIndex}
               indexUpdated={this.indexUpdated.bind(this)}
             />
-            <button onClick={() => this.setState({ renderIndex: false })}>Hide past entries</button>
+            <Button onClick={() => this.setState({ renderIndex: false })}>Hide past entries</Button>
           </>
         )
       } else {
         performanceDataIndex = (
-          <button id="show-index" onClick={() => this.setState({ renderIndex: true })}>Show past entries</button>
+          <Button id="show-index" onClick={() => this.setState({ renderIndex: true })}>Show past entries</Button>
         )
       }
     } else {
@@ -85,30 +96,47 @@ class App extends Component {
       } else {
         renderLogin = (
           <>
-            <button id="login" onClick={() => this.setState({ renderLoginForm: true })}>Login</button>
+            <Button id="login" onClick={() => this.setState({ renderLoginForm: true })}>Login</Button>
             <p>{this.state.message}</p>
           </>
         )
       }
     }
+    
     return (
-      <div>
-        <InputFields 
-          inputChangeHandler={this.onChange.bind(this)}
-        />
+      <Container>
+        <Grid centered columns={1}>
+          <Grid.Column>
+            <Segment>
+              <Form>
+                <Header as="h2" id="h2" textAlign="center">
+                  Cooper Challenge
+                </Header>
+          
+                <div>
+                  <InputFields
+                    inputChangeHandler={this.onChange.bind(this)}
+                    handleGenderChange={this.handleGenderChange.bind(this)}
+                  />
 
-        <DisplayCooperResult
-          distance={this.state.distance}
-          gender={this.state.gender}
-          age={this.state.age}
-          authenticated={this.state.authenticated}
-          entrySaved={this.state.entrySaved}
-          entryHandler={this.entryHandler.bind(this)}
-        />
-        {performanceDataIndex}
-        {renderLogin}
+                  <DisplayCooperResult
+                    distance={this.state.distance}
+                    gender={this.state.gender}
+                    age={this.state.age}
+                    authenticated={this.state.authenticated}
+                    entrySaved={this.state.entrySaved}
+                    entryHandler={this.entryHandler.bind(this)}
+                  />
 
-      </div>
+                  {performanceDataIndex}
+
+                </div>
+              </Form>
+            </Segment>
+            {renderLogin}
+          </Grid.Column>
+        </Grid>
+      </Container>
     );
   }
 }

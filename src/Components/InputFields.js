@@ -1,18 +1,35 @@
 import React from 'react';
+import { 
+  Form,
+  Dropdown,
+} from 'semantic-ui-react';
 
 const InputFields = (props) => {
+  const optionValues = [
+    {text: "Female", value: "female"},
+    {text: "Male", value: "male"}
+  ]
   return (
     <>
-      <label>Distance</label>
-      <input id="distance" onChange={props.inputChangeHandler}></input>
-
-      <select id="gender" onChange={props.inputChangeHandler}>
-        <option value="female">Female</option>
-        <option value="male">Male</option>
-      </select>
-
-      <label>Age</label>
-      <input id="age" onChange={props.inputChangeHandler}></input>
+    <Form type="large">
+    <Form.Input 
+      fluid id="distance" 
+      placeholder="Distance" 
+      onChange={props.inputChangeHandler}
+    />
+    <Form.Input 
+      fluid id id="age" 
+      placeholder="age"
+      onChange={props.inputChangeHandler}
+    />
+    </Form>
+    
+    <Dropdown 
+      selection id="gender" 
+      defaultValue={optionValues[0].value} 
+      options={optionValues} 
+      onChange={(e,{value}) => props.handleGenderChange(value)}
+    />
     </>
   )
 }
