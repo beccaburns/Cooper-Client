@@ -1,56 +1,58 @@
 import React, {Component} from 'react';
-import { Bar } from 'react-chartjs-2';
+import { Line } from 'react-chartjs-2';
 import { getData } from '../Modules/PerformanceData';
 
-class CooperGraph extends Component {
-  state = {
-    performanceData: null
+class Chart extends Component{
+  constructor(props) {
+    super(props);
+    this.state = {
+      performanceData: null
+      }
+    }
+  componentDidMount() {
+    this.getPerformanceDataChart()
   }
 
-  componentDidMount() {   
-    this.getPerformanceData()
-  }
-
-  async getPerformanceData() {
+  async getPerformanceDataChart() {
     let result = await getData();
     this.setState({performanceData: result.data.entries}, () => {
-      this.props.resultGraphUpdated();
-    })
-  }
-
-   render() {
-     let CooperGraphData;
+			this.props.graphUpdated();
+		})
+	}
+  
+  render() {
+    let dataIndex;
     
-     if (this.props.updateCooperChart === true) {
-       this.getPerformanceData();
-     };
-     
-     if (this.state.performanceData != null) {
-      const distances = []
-      const labels = []
-      this.state.performanceData.forEach(item => {
-        distances.push(item.data.distance)
-        labels.push(item.data.message)
-      })
-      const data = {
-        datasets: [
-          {
-            data: distances,
-            label: 'Perfomance'
-          }
-        ], labels: labels
-      }
-      
-      CooperGraphData = (      
-        <Bar data={data} />
-      )
+    if (this.props.renderChart === true) {
+      this.getPerformanceDataChart();
     }
+    if(this.state.performanceData != null) {
+      const distances = []
+			const labels = []
+			this.state.performanceData.forEach(entry => {
+			distances.push(entry.data.distance)
+			labels.push(entry.data.message)
+			})
+			const data = {
+				datasets: [{
+					data: distances,
+					label: "saved distances",
+				}],
+				labels: labels,
+			}
+			dataIndex = (
+				<>
+				  <Line ref='chart' data={data} />
+				</>
+				)
+			}
+
     return (
       <div>
-        {CooperGraphData}
+      {dataIndex}
       </div>
-    );
+      )
+    }
   }
-}
 
-export default CooperGraph;
+export default Chart;
