@@ -5,7 +5,7 @@ The Cooper Challenge project is a full stack application that allows users to ch
 
 The backend(API) was build on Ruby on Rails and the front-end was build on ReactJS. This project was bootstrapped with Create React App.
 
-Users can visit the deployed app [here]().
+Users can visit the deployed app [here](cooperchallenge.netlify.com).
 (Note: For the app to run properly accessing the API please fork the API repository [here](https://github.com/beccaburns/Cooper_App/tree/development/cooper_api) and run it with the rails s command.)
 
 ### Available Scripts:
