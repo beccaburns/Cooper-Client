@@ -4,7 +4,7 @@ import InputFields from "./Components/InputFields";
 import LoginForm from './Components/LoginForm';
 import { authenticate } from './Modules/Auth';
 import DisplayPerformanceData from './Components/DisplayPerformanceData';
-import Chart from './Components/Chart';
+import CooperGraph from './Components/Chart';
 import { 
   Container, 
   Grid,
@@ -28,44 +28,40 @@ class App extends Component {
       message: '',
       entrySaved: false,
       renderIndex: false,
-      renderChart: false
-      }
+      renderCooperData: false,
+      updateCooperData: false
+    }
   }
 
   entryHandler() {
-    this.setState({ entrySaved: true, updateIndex: true, updateChart: true });
-  }
-
-  getChartData() {
-    this.setState({ updateChart: true });
+    this.setState({ entrySaved: true, updateIndex: true, updateCooperData: true });
   }
 
   indexUpdated() {
     this.setState({ updateIndex: false });
   }
 
+  resultGraphUpdated() {
+    this.setState({ updateCooperData: false })
+  }
+
   handleGenderChange(value) {
 		this.setState({ gender: value})
   }
-
+  
   onChange(event) {
     this.setState({
       [event.target.id]: event.target.value,
       entrySaved: false
     });
   }
-
-  hideLoginForm() {
-    this.setState({ renderLoginForm: false });
-  }
-
   async onLogin(e) {
     e.preventDefault();
     let resp = await authenticate(this.state.email, this.state.password)
     if (resp.authenticated === true) {
       this.setState({ authenticated: true });
     } else {
-      this.setState({ message: resp.message, renderLoginForm: false });
+      this.setState({ message: resp.message, renderLoginForm: false })
     }
   }
 
@@ -73,7 +69,7 @@ class App extends Component {
     let renderLogin;
     let user;
     let performanceDataIndex;
-    let performanceDataChart;
+    let getGraph;
 
     if (this.state.authenticated === true) {
       user = JSON.parse(sessionStorage.getItem('credentials')).uid;
@@ -89,20 +85,26 @@ class App extends Component {
             />
             <Button onClick={() => this.setState({ renderIndex: false })}>Hide past entries</Button>
           </>
-        );
+        )
       } else {
         performanceDataIndex = (
           <Button id="show-index" onClick={() => this.setState({ renderIndex: true })}>Show past entries</Button>
         )
       }
-      if (this.state.renderChart === true) {
-        performanceDataChart = (          
-        <>
-          <Chart
-            updateChart={this.state.updateChart}
-            chartUpdated={this.chartUpdated.bind(this)}
-          />
-        </>
+      if (this.state.renderCooperData === true) {
+        getGraph = (
+          <>
+​
+            <CooperGraph
+              updateCooperData={this.state.updateCooperData}
+              resultGraphUpdated={this.resultGraphUpdated.bind(this)}
+            />
+            <Button id="Cgraph" onClick={() => this.setState({ renderCooperData: false })}>Hide Chart</Button>
+          </>
+        )
+      } else {
+        getGraph = (
+          <Button id="Cgraph" onClick={() => this.setState({ renderCooperData: true })}>Show Chart</Button>
         )
       }
     } else {
@@ -114,8 +116,8 @@ class App extends Component {
               inputChangeHandler={this.onChange.bind(this)}
             />
           </div>
-        );
-     } else {
+        )
+      } else {
         renderLogin = (
           <>
             <Button id="login" onClick={() => this.setState({ renderLoginForm: true })}>Login</Button>
@@ -139,8 +141,8 @@ class App extends Component {
                   <InputFields
                     inputChangeHandler={this.onChange.bind(this)}
                     handleGenderChange={this.handleGenderChange.bind(this)}
-                  />
-
+                    />
+​
                   <DisplayCooperResult
                     distance={this.state.distance}
                     gender={this.state.gender}
@@ -149,9 +151,10 @@ class App extends Component {
                     entrySaved={this.state.entrySaved}
                     entryHandler={this.entryHandler.bind(this)}
                   />
+                  <div>
+                    {getGraph}
+                  </div>
                   {performanceDataIndex}
-                  {performanceDataChart}
-
                 </div>
               </Form>
             </Segment>
