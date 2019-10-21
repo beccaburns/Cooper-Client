@@ -28,7 +28,7 @@ class App extends Component {
       message: '',
       entrySaved: false,
       renderIndex: false,
-      renderIndex: false
+      renderChart: false
       }
   }
 
@@ -37,7 +37,7 @@ class App extends Component {
   }
 
   getChartData() {
-    this.setState({ renderChart: true });
+    this.setState({ updateChart: true });
   }
 
   indexUpdated() {
@@ -46,7 +46,7 @@ class App extends Component {
 
   handleGenderChange(value) {
 		this.setState({ gender: value})
-	}
+  }
 
   onChange(event) {
     this.setState({
@@ -73,7 +73,7 @@ class App extends Component {
     let renderLogin;
     let user;
     let performanceDataIndex;
-    let renderChart;
+    let performanceDataChart;
 
     if (this.state.authenticated === true) {
       user = JSON.parse(sessionStorage.getItem('credentials')).uid;
@@ -96,7 +96,7 @@ class App extends Component {
         )
       }
       if (this.state.renderChart === true) {
-        renderChart = (          
+        performanceDataChart = (          
         <>
           <Chart
             updateChart={this.state.updateChart}
@@ -150,7 +150,7 @@ class App extends Component {
                     entryHandler={this.entryHandler.bind(this)}
                   />
                   {performanceDataIndex}
-                  {renderChart}
+                  {performanceDataChart}
 
                 </div>
               </Form>

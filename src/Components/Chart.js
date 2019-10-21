@@ -10,10 +10,10 @@ class Chart extends Component{
       }
     }
   componentDidMount() {
-    this.getPerformanceData()
+    this.getPerformanceDataChart()
   }
 
-  async getPerformanceData() {
+  async getPerformanceDataChart() {
     let result = await getData();
     this.setState({performanceData: result.data.entries}, () => {
 			this.props.graphUpdated();
@@ -24,7 +24,7 @@ class Chart extends Component{
     let dataIndex;
     
     if (this.props.renderChart === true) {
-      this.getPerformanceData();
+      this.getPerformanceDataChart();
     }
     if(this.state.performanceData != null) {
       const distances = []

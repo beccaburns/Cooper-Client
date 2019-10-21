@@ -18,7 +18,7 @@ class DisplayPerformanceData extends Component {
       this.props.indexUpdated();
     })
   }
-  async getPerformanceData() {
+  async getPerformanceDataChart() {
 		let result = await getData();
 		this.setState({performanceData: result.data.entries}, () => {
 			this.props.chartUpdated();
@@ -43,7 +43,7 @@ class DisplayPerformanceData extends Component {
     }
 
     if (this.props.updateChart === true) {
-      this.getPerformanceData();
+      this.getPerformanceDataChart();
     }
 
     return (
