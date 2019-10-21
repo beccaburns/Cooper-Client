@@ -93,6 +93,7 @@ class App extends Component {
       if (this.state.renderCooperData === true) {
         getGraph = (
           <>
+
             <CooperGraph
               updateCooperData={this.state.updateCooperData}
               resultGraphUpdated={this.resultGraphUpdated.bind(this)}
@@ -149,7 +150,6 @@ class App extends Component {
                     entrySaved={this.state.entrySaved}
                     entryHandler={this.entryHandler.bind(this)}
                   />
-                  {renderLogin}
                   <div>
                     {getGraph}
                   </div>
