@@ -5,6 +5,14 @@ import LoginForm from './Components/LoginForm';
 import { authenticate } from './Modules/Auth';
 import DisplayPerformanceData from './Components/DisplayPerformanceData';
 import CooperGraph from './Components/Chart';
+import { 
+  Container, 
+  Grid,
+  Form,
+  Header,
+  Button,
+  Segment,
+} from 'semantic-ui-react';
 
 class App extends Component {
   constructor(props) {
@@ -36,6 +44,9 @@ class App extends Component {
   resultGraphUpdated() {
     this.setState({ updateCooperData: false })
   }
+  handleGenderChange(value) {
+		this.setState({ gender: value})
+	}
 
   onChange(event) {
     this.setState({
@@ -71,12 +82,12 @@ class App extends Component {
               updateIndex={this.state.updateIndex}
               indexUpdated={this.indexUpdated.bind(this)}
             />
-            <button onClick={() => this.setState({ renderIndex: false })}>Hide past entries</button>
+            <Button onClick={() => this.setState({ renderIndex: false })}>Hide past entries</Button>
           </>
         )
       } else {
         performanceDataIndex = (
-          <button id="show-index" onClick={() => this.setState({ renderIndex: true })}>Show past entries</button>
+          <Button id="show-index" onClick={() => this.setState({ renderIndex: true })}>Show past entries</Button>
         )
       }
       if (this.state.renderCooperData === true) {
@@ -86,12 +97,12 @@ class App extends Component {
               updateCooperData={this.state.updateCooperData}
               resultGraphUpdated={this.resultGraphUpdated.bind(this)}
             />
-            <button id="Cgraph" onClick={() => this.setState({ renderCooperData: false })}>Hide Chart</button>
+            <Button id="Cgraph" onClick={() => this.setState({ renderCooperData: false })}>Hide Chart</Button>
           </>
         )
       } else {
         getGraph = (
-          <button id="Cgraph" onClick={() => this.setState({ renderCooperData: true })}>Show Chart</button>
+          <Button id="Cgraph" onClick={() => this.setState({ renderCooperData: true })}>Show Chart</Button>
         )
       }
     } else {
@@ -107,32 +118,49 @@ class App extends Component {
       } else {
         renderLogin = (
           <>
-            <button id="login" onClick={() => this.setState({ renderLoginForm: true })}>Login</button>
+            <Button id="login" onClick={() => this.setState({ renderLoginForm: true })}>Login</Button>
             <p>{this.state.message}</p>
           </>
         )
       }
     }
+    
     return (
-      <div>
-        <InputFields 
-          inputChangeHandler={this.onChange.bind(this)}
-        />
+      <Container>
+        <Grid centered columns={1}>
+          <Grid.Column>
+            <Segment>
+              <Form>
+                <Header as="h2" id="h2" textAlign="center">
+                  Cooper Challenge
+                </Header>
+          
+                <div>
+                  <InputFields
+                    inputChangeHandler={this.onChange.bind(this)}
+                    handleGenderChange={this.handleGenderChange.bind(this)}
+                    />
 
-        <DisplayCooperResult
-          distance={this.state.distance}
-          gender={this.state.gender}
-          age={this.state.age}
-          authenticated={this.state.authenticated}
-          entrySaved={this.state.entrySaved}
-          entryHandler={this.entryHandler.bind(this)}
-        />
-        {performanceDataIndex}
-        {renderLogin}
-        <div>
-          {getGraph}
-        </div>
-      </div>
+                  <DisplayCooperResult
+                    distance={this.state.distance}
+                    gender={this.state.gender}
+                    age={this.state.age}
+                    authenticated={this.state.authenticated}
+                    entrySaved={this.state.entrySaved}
+                    entryHandler={this.entryHandler.bind(this)}
+                  />
+                  {renderLogin}
+                  <div>
+                    {getGraph}
+                  </div>
+                  {performanceDataIndex}
+                </div>
+              </Form>
+            </Segment>
+            {renderLogin}
+          </Grid.Column>
+        </Grid>
+      </Container>
     );
   }
 }
