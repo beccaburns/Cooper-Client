@@ -8,7 +8,7 @@ The backend(API) was build on Ruby on Rails and the front-end was build on React
 Users can visit the deployed app [here](cooperchallenge.netlify.com).
 (Note: For the app to run properly accessing the API please fork the API repository [here](https://github.com/beccaburns/Cooper_App/tree/development/cooper_api) and run it with the rails s command.)
 
-### Available Scripts:
+## Available Scripts:
 In the project directory, you can run:
 
 #### npm start
@@ -31,7 +31,7 @@ It correctly bundles React in production mode and optimizes the build for the be
 The build is minified and the filenames include the hashes.
 Your app is ready to be deployed!
 
-### Craft Academy Challenge Question
+## Craft Academy Challenge Question
 In this project the calculation is performed on the client-side.
 
 ### Pros/Cons of client-side calculation
@@ -41,4 +41,5 @@ In this project the calculation is performed on the client-side.
 #### Cons
 - Security
 - Client-side resources can cause issue
-- Software can not be written in any language or framework without it affecting the client-side
+- Specific language - Software can not be written in any language or framework without it affecting the client-side
+- SEO can become a problem for team members
