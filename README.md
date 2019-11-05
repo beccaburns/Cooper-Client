@@ -50,8 +50,8 @@ $ yarn start
 ### Exploring the app online or in local host
 To be able to fully appreciate the software, one can log into the app with the following test-credentials:
 
-Email: user@mail.com
-Password: password
+- Email: user@mail.com
+- Password: password
 
 ### Updates/Improvements
 Later on, we would like to:
