@@ -1,68 +1,78 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## The Cooper Challenge for CraftAcademy
 
-## Available Scripts
+### Author
+- Becca Burns
+- Alex Saxena
 
-In the project directory, you can run:
+### This application was built with the following;
+- **Front End:** React v.16.10.2, Semantic UI, CSS
+- **Back End:** Rails 5.2.3
+- **Testing frameworks:** Cypress, Enzyme
+- **Deployed at:** Netlify and Heroku.
 
-### `yarn start`
+### What does the code do?
+This repository contains our solution to the client side of the Cooper Challenge. Our respective repositories for the Cooper API built in Rails can be found [here](https://github.com/beccaburns/Cooper_App/tree/master/cooper_api).
 
-Runs the app in the development mode.<br />
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+## Getting started
+### Dependencies
+- Yarn
+- React
+- Enzyme
+- Cypress
+- Semantic UI for React
+- Axios
+- Chart.js
+- react-chartjs-2
 
-The page will reload if you make edits.<br />
-You will also see any lint errors in the console.
+### Setup
+To test this application you need to fork it to your own GitHub account and clone it to your local workspace.
 
-### `yarn test`
+#### To install all of the dependencies:
+```
+$ yarn install
+```
 
-Launches the test runner in the interactive watch mode.<br />
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+#### To run the unit tests:
+```
+$ yarn test
+```
 
-### `yarn build`
+#### To start cypress and run the feature tests:
+```
+$ yarn run cy:open
+```
 
-Builds the app for production to the `build` folder.<br />
-It correctly bundles React in production mode and optimizes the build for the best performance.
+#### To start the application and run it on your local host:
+```
+$ yarn start
+```
 
-The build is minified and the filenames include the hashes.<br />
-Your app is ready to be deployed!
+### Exploring the app online or in local host
+To be able to fully appreciate the software, one can log into the app with the following test-credentials:
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+Email: user@mail.com
+Password: password
 
-### `yarn eject`
+### Updates/Improvements
+Later on, we would like to:
+Finish implementing the BMI calculator on the client side and add the save data functionality to it.
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+### License
+This project is released under the MIT-license.
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+### Acknowledgement
+Thank you CraftAcademy for giving us this assignment.
 
-Instead, it will copy all the configuration files and the transitive dependencies (Webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+#### CraftAcademy's Question for the completion of this assignment;
+In this project the calculation is performed on the client-side.
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
-
-### Analyzing the Bundle Size
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
-
-### Making a Progressive Web App
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
-
-### Advanced Configuration
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
-
-### Deployment
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
-
-### `yarn build` fails to minify
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+**What are the pros and cons of client-side processing/calculation ?**
+**Pros**
+It can, under some circumstances, mean more processing power.
+It makes scaling easier because computational load is not increased with each new user.
+Only increases storage but does not increase computational load on server. Hence, less server-cost.
+**Cons**
+Security, some processing should never be done client-side (banking f.ex.).
+Client-side resources can be more of an issue, f.ex. hardware capabilities and software compatibility on client-side.
+Software (calculations) can not be written in any language or framework.
+With server-side computation, more of the debugging is focused on a single target rather than, possibly, multiple client-side scenarios.
